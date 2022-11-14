@@ -276,7 +276,8 @@
 				6FBEE537290B90330089406C /* FeedTableTableViewCell.xib */,
 				6F20F6412902A44400D1029E /* FeedTableView */,
 			);
-			path = FeedTableTableViewCell;
+			name = FeedTableTableViewCell;
+			path = ../FeedTableTableViewCell;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

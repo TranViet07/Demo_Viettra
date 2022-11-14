@@ -17,31 +17,19 @@
                 <rect key="frame" x="0.0" y="0.0" width="414" height="1000"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nHM-OT-YAR">
-                        <rect key="frame" x="28" y="14" width="358" height="972"/>
-                        <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="hpk-Do-5fN">
-                                <rect key="frame" x="0.0" y="0.0" width="358" height="972"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" priority="250" constant="1000" id="wNp-NG-n67"/>
-                                </constraints>
-                            </tableView>
-                        </subviews>
+                    <tableView contentMode="scaleAspectFill" restorationIdentifier="FeedTableView" alwaysBounceVertical="YES" scrollEnabled="NO" style="plain" separatorStyle="default" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="hpk-Do-5fN" customClass="FeedTableView" customModule="Demo" customModuleProvider="target">
+                        <rect key="frame" x="28" y="56" width="358" height="944"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="hpk-Do-5fN" firstAttribute="top" secondItem="nHM-OT-YAR" secondAttribute="top" id="6cq-sd-33n"/>
-                            <constraint firstAttribute="bottom" secondItem="hpk-Do-5fN" secondAttribute="bottom" id="l9h-to-mmJ"/>
-                            <constraint firstAttribute="trailing" secondItem="hpk-Do-5fN" secondAttribute="trailing" id="sXz-xb-BA6"/>
-                            <constraint firstItem="hpk-Do-5fN" firstAttribute="leading" secondItem="nHM-OT-YAR" secondAttribute="leading" id="zvK-9a-3Wt"/>
+                            <constraint firstAttribute="height" priority="750" constant="10700" placeholder="YES" id="vRt-FB-9pT"/>
                         </constraints>
-                    </view>
+                    </tableView>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="nHM-OT-YAR" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="28" id="0Fs-4f-3wi"/>
-                    <constraint firstAttribute="trailing" secondItem="nHM-OT-YAR" secondAttribute="trailing" constant="28" id="O2I-lF-AA5"/>
-                    <constraint firstItem="nHM-OT-YAR" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="14" id="dKL-eM-TfC"/>
-                    <constraint firstAttribute="bottom" secondItem="nHM-OT-YAR" secondAttribute="bottom" constant="14" id="fb7-08-A70"/>
+                    <constraint firstAttribute="bottom" secondItem="hpk-Do-5fN" secondAttribute="bottom" id="cki-xt-Dy3"/>
+                    <constraint firstItem="hpk-Do-5fN" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="28" id="iOZ-oy-uNt"/>
+                    <constraint firstItem="hpk-Do-5fN" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="56" id="jfe-4B-bXn" userLabel="Feed Table View.top = top + 56"/>
+                    <constraint firstAttribute="trailing" secondItem="hpk-Do-5fN" secondAttribute="trailing" constant="28" id="w25-Fm-5N1"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>

@@ -8,20 +8,48 @@
 import UIKit
 
 class Collection1TableViewCell: UITableViewCell {
-
-    @IBOutlet weak var collection1: UICollectionView!
+    
+    @IBOutlet weak var collectionView: UICollectionView!
+    
+    private var dataSource: [Feed] = []
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        contentView.backgroundColor = .black
         
-        collection1.register(UINib(nibName: "FirstCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "FirstCollectionViewCell")
+        collectionView.register(UINib(nibName: "FirstCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "FirstCollectionViewCell")
+        collectionView.contentInset = UIEdgeInsets(top: 0, left: 28, bottom: 0, right: 28)
+        collectionView.delegate = self
+        collectionView.dataSource = self
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
     }
+    
+
+    
+    func configView(dataSource: [Feed]) {
+        self.dataSource = dataSource
+        collectionView.reloadData()
+    }
+    
+}
+
+extension Collection1TableViewCell: UICollectionViewDelegate, UICollectionViewDataSource {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return dataSource.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "FirstCollectionViewCell", for: indexPath as IndexPath) as! FirstCollectionViewCell
+        
+        cell.firstCollectionViewImage.loadImage(urlString: dataSource[indexPath.row].image)
+        cell.firstCollectionViewLabel.text = dataSource[indexPath.row].description
+        cell.firstCollectionViewContainer.layer.cornerRadius = 5
+        cell.firstCollectionViewContainer.backgroundColor = .lightGray
+        cell.firstCollectionViewContainer.clipsToBounds = true
+        return cell
+    }
+    
     
 }

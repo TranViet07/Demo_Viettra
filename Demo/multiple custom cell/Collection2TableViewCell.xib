@@ -17,39 +17,27 @@
                 <rect key="frame" x="0.0" y="0.0" width="414" height="136"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="V7r-jL-rx7">
-                        <rect key="frame" x="28" y="14" width="358" height="108"/>
-                        <subviews>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="X2n-LM-oXP" customClass="SecondCollectionView" customModule="Demo" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="0.0" width="358" height="108"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="H2K-tC-ZZp">
-                                    <size key="itemSize" width="128" height="128"/>
-                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
-                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                </collectionViewFlowLayout>
-                            </collectionView>
-                        </subviews>
+                    <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="X2n-LM-oXP" customClass="SecondCollectionView" customModule="Demo" customModuleProvider="target">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="136"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                        <constraints>
-                            <constraint firstItem="X2n-LM-oXP" firstAttribute="top" secondItem="V7r-jL-rx7" secondAttribute="top" id="LvB-eM-Zea"/>
-                            <constraint firstAttribute="trailing" secondItem="X2n-LM-oXP" secondAttribute="trailing" id="i3g-mX-LMs"/>
-                            <constraint firstAttribute="bottom" secondItem="X2n-LM-oXP" secondAttribute="bottom" id="iBB-Wj-ooG"/>
-                            <constraint firstItem="X2n-LM-oXP" firstAttribute="leading" secondItem="V7r-jL-rx7" secondAttribute="leading" id="rH7-a1-fSM"/>
-                        </constraints>
-                    </view>
+                        <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="28" minimumInteritemSpacing="28" id="H2K-tC-ZZp">
+                            <size key="itemSize" width="128" height="128"/>
+                            <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                            <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                            <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                        </collectionViewFlowLayout>
+                    </collectionView>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="V7r-jL-rx7" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="28" id="3xr-j9-TrH"/>
-                    <constraint firstItem="V7r-jL-rx7" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="14" id="YjU-tM-xk3"/>
-                    <constraint firstAttribute="bottom" secondItem="V7r-jL-rx7" secondAttribute="bottom" constant="14" id="brT-ef-OpL"/>
-                    <constraint firstAttribute="trailing" secondItem="V7r-jL-rx7" secondAttribute="trailing" constant="28" id="t8b-a2-GQ1"/>
+                    <constraint firstAttribute="trailing" secondItem="X2n-LM-oXP" secondAttribute="trailing" id="2LI-r8-XcY"/>
+                    <constraint firstItem="X2n-LM-oXP" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="4WF-1x-sXq"/>
+                    <constraint firstItem="X2n-LM-oXP" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="FLd-hp-9ho"/>
+                    <constraint firstAttribute="bottom" secondItem="X2n-LM-oXP" secondAttribute="bottom" id="gO5-Qi-LHb"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
-                <outlet property="collection2" destination="X2n-LM-oXP" id="Wah-jL-B7M"/>
+                <outlet property="collectionView" destination="X2n-LM-oXP" id="DXh-Vl-eJ3"/>
             </connections>
             <point key="canvasLocation" x="132" y="131"/>
         </tableViewCell>

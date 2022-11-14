@@ -9,6 +9,11 @@ import UIKit
 
 class FeedTableView: UITableView {
 
+    
+    override func reloadData() {
+            super.reloadData()
+            self.invalidateIntrinsicContentSize()
+        }
     override var intrinsicContentSize: CGSize {
             self.layoutIfNeeded()
             return self.contentSize
@@ -18,9 +23,8 @@ class FeedTableView: UITableView {
                 self.invalidateIntrinsicContentSize()
             }
         }
-    override func reloadData() {
-            super.reloadData()
-            self.invalidateIntrinsicContentSize()
-        }
-
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return UITableView.automaticDimension
+    }
+    
 }

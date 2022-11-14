@@ -14,7 +14,7 @@ class MenuCollectionViewCell: UICollectionViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        
+    
     }
 
 }

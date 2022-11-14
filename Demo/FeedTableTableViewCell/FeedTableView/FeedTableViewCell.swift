@@ -14,6 +14,9 @@ class FeedTableViewCell: UITableViewCell {
     
     @IBOutlet weak var imgLblView: UIView!
     
-
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        feedImage.image = nil
+    }
     
 }

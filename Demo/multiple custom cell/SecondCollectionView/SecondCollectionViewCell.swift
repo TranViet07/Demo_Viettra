@@ -10,5 +10,9 @@ import UIKit
 class SecondCollectionViewCell: UICollectionViewCell {
     
     @IBOutlet weak var secondCollectionViewCellImg: UIImageView!
-
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        secondCollectionViewCellImg.image = nil
+    }
 }

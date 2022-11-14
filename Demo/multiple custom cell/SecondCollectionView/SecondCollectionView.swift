@@ -29,5 +29,4 @@ class SecondCollectionView: UICollectionView {
             super.reloadData()
             self.invalidateIntrinsicContentSize()
         }
-
 }

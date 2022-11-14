@@ -16,6 +16,11 @@ class FirstCollectionViewCell: UICollectionViewCell {
         super.awakeFromNib()
         
     }
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        firstCollectionViewImage.image = nil
+    }
+    
     
 }
     
