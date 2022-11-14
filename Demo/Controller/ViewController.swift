@@ -31,8 +31,10 @@ class ViewController: UIViewController {
         homeTableView.register(UINib(nibName: "Collection1TableViewCell", bundle: nil), forCellReuseIdentifier: "Collection1TableViewCell")
         homeTableView.register(UINib(nibName: "FeedLabelTableViewCell", bundle: nil), forCellReuseIdentifier: "FeedLabelTableViewCell")
         homeTableView.register(UINib(nibName: "Collection2TableViewCell", bundle: nil), forCellReuseIdentifier: "Collection2TableViewCell")
-        homeTableView.register(UINib(nibName: "FeedTableTableViewCell", bundle: nil), forCellReuseIdentifier: "FeedTableTableViewCell")
-    
+        homeTableView.register(UINib(nibName: "FeedTableViewCell", bundle: nil), forCellReuseIdentifier: "FeedTableViewCell")
+        
+        homeTableView.rowHeight = UITableView.automaticDimension
+        homeTableView.estimatedRowHeight = UITableView.automaticDimension
         homeTableView.refreshControl = UIRefreshControl()
         homeTableView.refreshControl?.addTarget(self, action: #selector(pullToRefresh), for: .valueChanged)
         
@@ -73,55 +75,65 @@ class ViewController: UIViewController {
         }
     }
     
-//    func scrollToTop() {
-//        self.homeTableView.contentOffset.y = .zero
-//        UIView.animate(withDuration: 0.5) {
-//            self.reloadInputViews()
-//            self.view.layoutIfNeeded()
-//        }
-//    }
+    func scrollToTop() {
+        self.homeTableView.contentOffset.y = .zero
+        UIView.animate(withDuration: 0.5) {
+            self.view.layoutIfNeeded()
+        }
+    }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        homeTableView.reloadData()
-//        scrollToTop()
+        scrollToTop()
     }
-    
 }
 
 extension ViewController: UITableViewDelegate, UITableViewDataSource {
     
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 6
+    }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 6
+        
+        if section == 5 {
+            return feed.count
+        } else {
+            return 1
+        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        if indexPath.row == 0 {
+        if indexPath.section == 0 {
             let cell = tableView.dequeueReusableCell(withIdentifier: "MenuTableViewCell", for: indexPath as IndexPath) as! MenuTableViewCell
             cell.menuLabel.text = "Good \(cell.currentTime())!"
             cell.menuCollectionView.backgroundColor = .none
             return cell
-        } else if indexPath.row == 1 {
+        } else if indexPath.section == 1 {
             let cell = tableView.dequeueReusableCell(withIdentifier: "SearchTableViewCell", for: indexPath as IndexPath) as! SearchTableViewCell
             return cell
-        } else if indexPath.row == 2 {
+        } else if indexPath.section == 2 {
             let cell = tableView.dequeueReusableCell(withIdentifier: "Collection1TableViewCell", for: indexPath as IndexPath) as! Collection1TableViewCell
             cell.configView(dataSource: feed)
             return cell
-        } else if indexPath.row == 3 {
+        } else if indexPath.section == 3 {
             let cell = tableView.dequeueReusableCell(withIdentifier: "FeedLabelTableViewCell", for: indexPath as IndexPath) as! FeedLabelTableViewCell
             return cell
-        } else if indexPath.row == 4 {
+        } else if indexPath.section == 4 {
             let cell = tableView.dequeueReusableCell(withIdentifier: "Collection2TableViewCell", for: indexPath as IndexPath) as! Collection2TableViewCell
             cell.configView(dataSource: feed)
             return cell
         }
-            else if indexPath.row == 5 {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "FeedTableTableViewCell", for: indexPath as IndexPath) as! FeedTableTableViewCell
-            cell.configView(dataSource: feed)
-            return cell
+            else if indexPath.section == 5 {
+                let cell = tableView.dequeueReusableCell(withIdentifier: "FeedTableViewCell", for: indexPath as IndexPath) as! FeedTableViewCell
+                
+                cell.feedImage.loadImage(urlString: feed[indexPath.row].image)
+                cell.feedLabel.text = feed[indexPath.row].description
+                cell.imgLblView.backgroundColor = .white
+                cell.imgLblView.layer.cornerRadius = 5
+                cell.imgLblView.clipsToBounds = true
+                return cell
         }
             else {
             return UITableViewCell()
@@ -129,17 +141,14 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
             
     }
     
-    func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        if indexPath.section == 2 {
+            return 128
+        }
+        tableView.estimatedRowHeight = 100
         return UITableView.automaticDimension
     }
     
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        if indexPath.row == 2 {
-            return 128
-        }
-        tableView.estimatedRowHeight = 0
-        return UITableView.automaticDimension
-    }
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         cell.reloadInputViews()
