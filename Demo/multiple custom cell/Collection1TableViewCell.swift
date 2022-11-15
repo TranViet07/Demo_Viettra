@@ -7,7 +7,9 @@
 
 import UIKit
 
-class Collection1TableViewCell: UITableViewCell {
+class Collection1TableViewCell: UITableViewCell, CanAutoScrollToLeft {
+    
+    
     
     @IBOutlet weak var collectionView: UICollectionView!
     
@@ -25,14 +27,15 @@ class Collection1TableViewCell: UITableViewCell {
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
     }
-    
 
-    
     func configView(dataSource: [Feed]) {
         self.dataSource = dataSource
         collectionView.reloadData()
     }
     
+    func autoScrollToLeft() {
+        self.collectionView.contentOffset.x = CGFloat(28)
+    }
 }
 
 extension Collection1TableViewCell: UICollectionViewDelegate, UICollectionViewDataSource {
@@ -50,6 +53,5 @@ extension Collection1TableViewCell: UICollectionViewDelegate, UICollectionViewDa
         cell.firstCollectionViewContainer.clipsToBounds = true
         return cell
     }
-    
     
 }

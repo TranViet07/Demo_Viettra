@@ -43,7 +43,6 @@ class LoginViewController: UIViewController {
 
             (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.changeRootViewController(mainTabBarController)
         
-        
     }
     
     @IBAction func RegisterPressed(_ sender: Any) {

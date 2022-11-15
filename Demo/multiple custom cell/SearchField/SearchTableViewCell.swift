@@ -14,6 +14,7 @@ class SearchTableViewCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        self.mainSearchBar.searchTextField.leftView?.tintColor = UIColor(named: "lightGreen")
         // Initialization code
     }
 
@@ -22,5 +23,7 @@ class SearchTableViewCell: UITableViewCell {
 
         // Configure the view for the selected state
     }
+    
+    
     
 }

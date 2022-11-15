@@ -7,7 +7,7 @@
 
 import UIKit
 
-class Collection2TableViewCell: UITableViewCell {
+class Collection2TableViewCell: UITableViewCell, CanAutoScrollToLeft {
 
     @IBOutlet weak var collectionView: UICollectionView!
     
@@ -29,6 +29,10 @@ class Collection2TableViewCell: UITableViewCell {
     func configView(dataSource: [Feed]) {
         self.dataSource = dataSource
         collectionView.reloadData()
+    }
+    
+    func autoScrollToLeft() {
+        self.collectionView.contentOffset.x = CGFloat(28)
     }
     
 }

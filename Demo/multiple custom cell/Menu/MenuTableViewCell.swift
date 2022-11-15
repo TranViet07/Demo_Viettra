@@ -10,7 +10,7 @@ import UIKit
 class MenuTableViewCell: UITableViewCell, UICollectionViewDelegate, UICollectionViewDataSource {
     
     private let item = ["Facebook", "Instagram", "Youtube", "Shopee", "Bank", "Bookmark", "Interrogation", "More"]
-    private var navigateApp: String = ""
+    private lazy var navigateApp: String = ""
     
     @IBOutlet weak var topLabel: UILabel!
     @IBOutlet weak var menuLabel: UILabel!
@@ -60,6 +60,7 @@ class MenuTableViewCell: UITableViewCell, UICollectionViewDelegate, UICollection
         if collectionView.tag == 0 {
             navigateApp = item[indexPath.row]
             UIApplication.shared.open(URL(string: "http://\(navigateApp).com/")!)
+            
         }
         
     }
