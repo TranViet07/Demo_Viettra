@@ -33,8 +33,6 @@ class LoginViewController: UIViewController {
         registerButton.layer.cornerRadius = registerButton.frame.height/2
         registerButton.clipsToBounds = true
         
-        
-        
 
     }
     

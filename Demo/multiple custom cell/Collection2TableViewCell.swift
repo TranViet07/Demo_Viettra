@@ -24,14 +24,7 @@ class Collection2TableViewCell: UITableViewCell {
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
-        // Configure the view for the selected state
     }
-    
-//    override func prepareForReuse() {
-//        super.prepareForReuse()
-//        collectionView.delegate = self
-//        collectionView.dataSource = self
-//    }
     
     func configView(dataSource: [Feed]) {
         self.dataSource = dataSource

@@ -18,7 +18,7 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
             
-        getData()
+        getData(from: urlString)
         
         homeTableView.delegate = self
         homeTableView.dataSource = self
@@ -39,7 +39,7 @@ class ViewController: UIViewController {
         homeTableView.refreshControl?.addTarget(self, action: #selector(pullToRefresh), for: .valueChanged)
         
         customRefresh()
-        
+        view.layoutIfNeeded()
     }
     
     // pull to refresh
@@ -67,8 +67,8 @@ class ViewController: UIViewController {
         }
     }
     
-    func getData() {
-        if let url = URL.init(string : urlString){
+    func getData(from urlString: String) {
+        if let url = URL.init(string: urlString){
             if let data = try? Data(contentsOf: url){
                 parseJSON(json: data)
             }
@@ -85,6 +85,7 @@ class ViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         scrollToTop()
+        
     }
 }
 
@@ -95,7 +96,6 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
         if section == 5 {
             return feed.count
         } else {
@@ -124,8 +124,7 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
             let cell = tableView.dequeueReusableCell(withIdentifier: "Collection2TableViewCell", for: indexPath as IndexPath) as! Collection2TableViewCell
             cell.configView(dataSource: feed)
             return cell
-        }
-            else if indexPath.section == 5 {
+        } else if indexPath.section == 5 {
                 let cell = tableView.dequeueReusableCell(withIdentifier: "FeedTableViewCell", for: indexPath as IndexPath) as! FeedTableViewCell
                 
                 cell.feedImage.loadImage(urlString: feed[indexPath.row].image)
@@ -134,8 +133,7 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
                 cell.imgLblView.layer.cornerRadius = 5
                 cell.imgLblView.clipsToBounds = true
                 return cell
-        }
-            else {
+        } else {
             return UITableViewCell()
         }
             
@@ -149,12 +147,10 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
         return UITableView.automaticDimension
     }
     
-    
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         cell.reloadInputViews()
         cell.layoutIfNeeded()
     }
-    
 }
 
 extension ViewController: UIScrollViewDelegate{
@@ -172,7 +168,6 @@ extension UIImageView {
             self.image = cacheImage
             return
         }
-        
         guard let url = URL(string: urlString) else { return }
         
         URLSession.shared.dataTask(with: url) { (data, response, error) in
@@ -180,11 +175,9 @@ extension UIImageView {
                 print("Couldn't download image: ", error)
                 return
             }
-            
             guard let data = data else { return }
             let image = UIImage(data: data)
             imageCache.setObject(image as AnyObject, forKey: urlString as AnyObject)
-            
             DispatchQueue.main.async {
                 self.image = image
             }
