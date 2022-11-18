@@ -23,6 +23,10 @@ class Collection1TableViewCell: UITableViewCell, CanAutoScrollToLeft {
         collectionView.delegate = self
         collectionView.dataSource = self
     }
+    
+    override func prepareForReuse() {
+        print("Collection1TableViewCell prepareForReuse")
+    }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)

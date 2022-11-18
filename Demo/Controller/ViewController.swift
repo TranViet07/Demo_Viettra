@@ -78,11 +78,11 @@ class ViewController: UIViewController {
 extension ViewController: UITableViewDelegate, UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 7
+        return 10
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if section == 6 {
+        if section == 9 {
             return dataModel.feed.count
         }
         return 1
@@ -105,16 +105,53 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
             return cell
         case 3:
             let cell = tableView.dequeueReusableCell(withIdentifier: "Collection1TableViewCell", for: indexPath as IndexPath) as! Collection1TableViewCell
-            cell.configView(dataSource: dataModel.feed)
+            var dataSource = [Feed]()
+            for (index, item) in dataModel.feed.enumerated() {
+                if index % 2 == 0 {
+                    dataSource.append(item)
+                }
+            }
+            cell.contentView.backgroundColor = .red
+            cell.configView(dataSource: dataSource)
             return cell
         case 4:
-            let cell = tableView.dequeueReusableCell(withIdentifier: "FeedLabelTableViewCell", for: indexPath as IndexPath) as! FeedLabelTableViewCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: "Collection1TableViewCell", for: indexPath as IndexPath) as! Collection1TableViewCell
+            var dataSource = [Feed]()
+            for (index, item) in dataModel.feed.enumerated() {
+                if index % 2 != 0 {
+                    dataSource.append(item)
+                }
+            }
+            cell.configView(dataSource: dataSource)
             return cell
         case 5:
+            let cell = tableView.dequeueReusableCell(withIdentifier: "Collection1TableViewCell", for: indexPath as IndexPath) as! Collection1TableViewCell
+            var dataSource = [Feed]()
+            for (index, item) in dataModel.feed.enumerated() {
+                if index % 7 == 0 {
+                    dataSource.append(item)
+                }
+            }
+            cell.configView(dataSource: dataSource)
+            return cell
+        case 6:
+            let cell = tableView.dequeueReusableCell(withIdentifier: "Collection1TableViewCell", for: indexPath as IndexPath) as! Collection1TableViewCell
+            var dataSource = [Feed]()
+            for (index, item) in dataModel.feed.enumerated() {
+                if index % 5 == 0 {
+                    dataSource.append(item)
+                }
+            }
+            cell.configView(dataSource: dataSource)
+            return cell
+        case 7:
+            let cell = tableView.dequeueReusableCell(withIdentifier: "FeedLabelTableViewCell", for: indexPath as IndexPath) as! FeedLabelTableViewCell
+            return cell
+        case 8:
             let cell = tableView.dequeueReusableCell(withIdentifier: "Collection2TableViewCell", for: indexPath as IndexPath) as! Collection2TableViewCell
             cell.configView(dataSource: dataModel.feed)
             return cell
-        case 6:
+        case 9:
             let cell = tableView.dequeueReusableCell(withIdentifier: "FeedTableViewCell", for: indexPath as IndexPath) as! FeedTableViewCell
             
             cell.feedImage.loadImage(urlString: dataModel.feed[indexPath.row].image)
@@ -130,8 +167,8 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        if indexPath.section == 2  || indexPath.section == 3 {
-            return 128
+        if indexPath.section == 2  || indexPath.section == 3  || indexPath.section == 4 || indexPath.section == 5 || indexPath.section == 6{
+            return 156
         }
         tableView.estimatedRowHeight = 100
         return UITableView.automaticDimension
