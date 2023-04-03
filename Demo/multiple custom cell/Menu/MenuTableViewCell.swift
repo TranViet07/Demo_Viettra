@@ -22,6 +22,8 @@ class MenuTableViewCell: UITableViewCell {
         menuCollectionView.register(UINib(nibName: "MenuCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "MenuCollectionViewCell")
         
         // Initialization code
+        
+        self.backgroundColor = .red
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
