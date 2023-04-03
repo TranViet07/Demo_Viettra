@@ -17,10 +17,7 @@ class MenuTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         menuCollectionView.register(UINib(nibName: "MenuCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "MenuCollectionViewCell")
-        
         configureUI()
-        // Initialization code
-        
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -38,6 +35,7 @@ class MenuTableViewCell: UITableViewCell {
     
     private func configureUI() {
         self.backgroundColor = .red
+        menuLabel.backgroundColor = .green
     }
 }
 
