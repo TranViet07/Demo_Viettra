@@ -20,7 +20,7 @@ class MenuTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         menuCollectionView.register(UINib(nibName: "MenuCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "MenuCollectionViewCell")
-        
+        menuLabel.backgroundColor = .green
         // Initialization code
     }
 
