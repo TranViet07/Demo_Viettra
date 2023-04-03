@@ -15,44 +15,63 @@ class ViewController: UIViewController {
     
 
     
-    @IBOutlet weak var homeTableView: UITableView!
+    @IBOutlet weak var homeCollectionView: UICollectionView!
     
+
     override func viewDidLoad() {
         super.viewDidLoad()
-            
+        
+        collectionViewLayout()
+    
         dataModel.getData(from: urlString)
         
-        homeTableView.delegate = self
-        homeTableView.dataSource = self
-        homeTableView.separatorStyle = .none
-        homeTableView.backgroundColor = UIColor(named: "lightGreen")
+        homeCollectionView.delegate = self
+        homeCollectionView.dataSource = self
+        homeCollectionView.backgroundColor = UIColor(named: "lightGreen")
         
-        homeTableView.register(UINib(nibName: "MenuTableViewCell", bundle: nil), forCellReuseIdentifier: "MenuTableViewCell")
-        homeTableView.register(UINib(nibName: "SearchTableViewCell", bundle: nil), forCellReuseIdentifier: "SearchTableViewCell")
-        homeTableView.register(UINib(nibName: "Collection1TableViewCell", bundle: nil), forCellReuseIdentifier: "Collection1TableViewCell")
-        homeTableView.register(UINib(nibName: "FeedLabelTableViewCell", bundle: nil), forCellReuseIdentifier: "FeedLabelTableViewCell")
-        homeTableView.register(UINib(nibName: "Collection2TableViewCell", bundle: nil), forCellReuseIdentifier: "Collection2TableViewCell")
-        homeTableView.register(UINib(nibName: "FeedTableViewCell", bundle: nil), forCellReuseIdentifier: "FeedTableViewCell")
         
-        homeTableView.rowHeight = UITableView.automaticDimension
-        homeTableView.estimatedRowHeight = UITableView.automaticDimension
-        homeTableView.refreshControl = UIRefreshControl()
-        homeTableView.refreshControl?.addTarget(self, action: #selector(pullToRefresh), for: .valueChanged)
+        homeCollectionView.register(UINib(nibName: "Menu", bundle: nil), forCellWithReuseIdentifier: "Menu")
+        homeCollectionView.register(UINib(nibName: "Search", bundle: nil), forCellWithReuseIdentifier: "Search")
+        homeCollectionView.register(UINib(nibName: "CollectionView1", bundle: nil), forCellWithReuseIdentifier: "CollectionView1")
+        homeCollectionView.register(UINib(nibName: "Status", bundle: nil), forCellWithReuseIdentifier: "Status")
+        homeCollectionView.register(UINib(nibName: "CollectionView2", bundle: nil), forCellWithReuseIdentifier: "CollectionView2")
+        homeCollectionView.register(UINib(nibName: "FeedCard", bundle: nil), forCellWithReuseIdentifier: "FeedCard")
+        
+        
+        homeCollectionView.refreshControl = UIRefreshControl()
+        homeCollectionView.refreshControl?.addTarget(self, action: #selector(pullToRefresh), for: .valueChanged)
+        
         
         customRefresh()
         view.layoutIfNeeded()
+    }
+    private func collectionViewLayout() {
+        let screenSize = UIScreen.main.bounds
+        let screenWidth = screenSize.width
+        let screenHeight = screenSize.height
+        
+        // Do any additional setup after loading the view, typically from a nib.
+        let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
+//        layout.sectionInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+        layout.itemSize.width = screenWidth
+        layout.itemSize.height = 400
+//        layout.minimumInteritemSpacing = 0
+//        layout.minimumLineSpacing = 28
+//        layout.sectionInset.bottom = 28
+
+        homeCollectionView?.collectionViewLayout = layout
     }
     
     // pull to refresh
     
     @objc func pullToRefresh() {
         DispatchQueue.main.async {
-            self.homeTableView.refreshControl?.endRefreshing()
+            self.homeCollectionView.refreshControl?.endRefreshing()
         }
     }
     
     func customRefresh(){
-        let target = self.homeTableView.refreshControl
+        let target = self.homeCollectionView.refreshControl
         let attributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
         
         target?.tintColor = .white
@@ -61,12 +80,10 @@ class ViewController: UIViewController {
     }
     
     func scrollToTop() {
-        self.homeTableView.contentOffset.y = .zero
+        self.homeCollectionView.contentOffset.y = .zero
         UIView.animate(withDuration: 0.5) {
             self.view.layoutIfNeeded()
         }
-//        collectionView1ScrollToLeft()
-//        CollectionView2ScrollToLeft()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -75,85 +92,44 @@ class ViewController: UIViewController {
     }
 }
 
-extension ViewController: UITableViewDelegate, UITableViewDataSource {
+extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return 10
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+        return 6
     }
     
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if section == 9 {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        if section == 5 {
             return dataModel.feed.count
         }
         return 1
     }
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         switch indexPath.section {
         case 0:
-            let cell = tableView.dequeueReusableCell(withIdentifier: "MenuTableViewCell", for: indexPath as IndexPath) as! MenuTableViewCell
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Menu", for: indexPath as IndexPath) as! Menu
             cell.menuLabel.text = "Good \(cell.currentTime())!"
             cell.menuCollectionView.backgroundColor = .none
             return cell
         case 1:
-            let cell = tableView.dequeueReusableCell(withIdentifier: "SearchTableViewCell", for: indexPath as IndexPath) as! SearchTableViewCell
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Search", for: indexPath as IndexPath) as! Search
             return cell
         case 2:
-            let cell = tableView.dequeueReusableCell(withIdentifier: "Collection1TableViewCell", for: indexPath as IndexPath) as! Collection1TableViewCell
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CollectionView1", for: indexPath as IndexPath) as! CollectionView1
             cell.configView(dataSource: dataModel.feed)
             return cell
         case 3:
-            let cell = tableView.dequeueReusableCell(withIdentifier: "Collection1TableViewCell", for: indexPath as IndexPath) as! Collection1TableViewCell
-            var dataSource = [Feed]()
-            for (index, item) in dataModel.feed.enumerated() {
-                if index % 2 == 0 {
-                    dataSource.append(item)
-                }
-            }
-            cell.contentView.backgroundColor = .red
-            cell.configView(dataSource: dataSource)
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Status", for: indexPath as IndexPath) as! Status
             return cell
         case 4:
-            let cell = tableView.dequeueReusableCell(withIdentifier: "Collection1TableViewCell", for: indexPath as IndexPath) as! Collection1TableViewCell
-            var dataSource = [Feed]()
-            for (index, item) in dataModel.feed.enumerated() {
-                if index % 2 != 0 {
-                    dataSource.append(item)
-                }
-            }
-            cell.configView(dataSource: dataSource)
-            return cell
-        case 5:
-            let cell = tableView.dequeueReusableCell(withIdentifier: "Collection1TableViewCell", for: indexPath as IndexPath) as! Collection1TableViewCell
-            var dataSource = [Feed]()
-            for (index, item) in dataModel.feed.enumerated() {
-                if index % 7 == 0 {
-                    dataSource.append(item)
-                }
-            }
-            cell.configView(dataSource: dataSource)
-            return cell
-        case 6:
-            let cell = tableView.dequeueReusableCell(withIdentifier: "Collection1TableViewCell", for: indexPath as IndexPath) as! Collection1TableViewCell
-            var dataSource = [Feed]()
-            for (index, item) in dataModel.feed.enumerated() {
-                if index % 5 == 0 {
-                    dataSource.append(item)
-                }
-            }
-            cell.configView(dataSource: dataSource)
-            return cell
-        case 7:
-            let cell = tableView.dequeueReusableCell(withIdentifier: "FeedLabelTableViewCell", for: indexPath as IndexPath) as! FeedLabelTableViewCell
-            return cell
-        case 8:
-            let cell = tableView.dequeueReusableCell(withIdentifier: "Collection2TableViewCell", for: indexPath as IndexPath) as! Collection2TableViewCell
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CollectionView2", for: indexPath as IndexPath) as! CollectionView2
             cell.configView(dataSource: dataModel.feed)
             return cell
-        case 9:
-            let cell = tableView.dequeueReusableCell(withIdentifier: "FeedTableViewCell", for: indexPath as IndexPath) as! FeedTableViewCell
-            
+        case 5:
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "FeedCard", for: indexPath as IndexPath) as! FeedCard
+
             cell.feedImage.loadImage(urlString: dataModel.feed[indexPath.row].image)
             cell.feedLabel.text = dataModel.feed[indexPath.row].description
             cell.imgLblView.backgroundColor = .white
@@ -161,21 +137,26 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
             cell.imgLblView.clipsToBounds = true
             return cell
         default:
-            return UITableViewCell()
+            return UICollectionViewCell()
         }
-          
+        
     }
-    
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        if indexPath.section == 2  || indexPath.section == 3  || indexPath.section == 4 || indexPath.section == 5 || indexPath.section == 6{
-            return 156
-        }
-        tableView.estimatedRowHeight = 100
-        return UITableView.automaticDimension
-    }
-    
     
 }
+
+
+    
+//extension ViewController: UITableViewDelegate, UITableViewDataSource {
+
+//    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+//        if indexPath.section == 2{
+//            return 156
+//        }
+//        tableView.estimatedRowHeight = 100
+//        return UITableView.automaticDimension
+//    }
+//
+//}
 
 extension ViewController: UIScrollViewDelegate{
     func scrollViewDidScroll(_ scrollView: UIScrollView) {

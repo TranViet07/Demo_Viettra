@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="Search" id="gTV-IL-0wX" customClass="Search" customModule="Demo" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="72"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="414" height="72"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Type Something bro" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="2vD-B0-4Lj">
+                        <rect key="frame" x="28" y="14" width="358" height="44"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="44" id="V8z-Yy-WD3"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <textInputTraits key="textInputTraits"/>
+                    </textField>
+                </subviews>
+            </view>
+            <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstItem="2vD-B0-4Lj" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="28" id="3Z8-27-zOl"/>
+                <constraint firstAttribute="trailing" secondItem="2vD-B0-4Lj" secondAttribute="trailing" constant="28" id="Sa9-fI-Dwr"/>
+                <constraint firstAttribute="bottom" secondItem="2vD-B0-4Lj" secondAttribute="bottom" constant="14" id="W13-NT-JaG"/>
+                <constraint firstItem="2vD-B0-4Lj" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="14" id="rgw-K2-5oP"/>
+            </constraints>
+            <connections>
+                <outlet property="searchTextField" destination="2vD-B0-4Lj" id="90L-ZY-AgD"/>
+            </connections>
+            <point key="canvasLocation" x="15" y="-11"/>
+        </collectionViewCell>
+    </objects>
+</document>

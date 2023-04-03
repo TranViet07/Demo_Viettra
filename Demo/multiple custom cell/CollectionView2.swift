@@ -1,13 +1,13 @@
 //
-//  Collection2TableViewCell.swift
+//  CollectionView2.swift
 //  Demo
 //
-//  Created by TRANVIET on 28/10/2022.
+//  Created by TRANVIET on 22/11/2022.
 //
 
 import UIKit
 
-class Collection2TableViewCell: UITableViewCell, CanAutoScrollToLeft {
+class CollectionView2: UICollectionViewCell {
 
     @IBOutlet weak var collectionView: UICollectionView!
     
@@ -20,24 +20,15 @@ class Collection2TableViewCell: UITableViewCell, CanAutoScrollToLeft {
         collectionView.delegate = self
         collectionView.dataSource = self
     }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-    }
     
     func configView(dataSource: [Feed]) {
         self.dataSource = dataSource
         collectionView.reloadData()
     }
-    
-    func autoScrollToLeft() {
-        self.collectionView.contentOffset.x = CGFloat(28)
-    }
-    
 }
 
-extension Collection2TableViewCell: UICollectionViewDelegate, UICollectionViewDataSource {
+
+extension CollectionView2: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return dataSource.count
     }

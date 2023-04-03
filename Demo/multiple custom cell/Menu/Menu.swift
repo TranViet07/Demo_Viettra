@@ -1,15 +1,16 @@
 //
-//  MenuTableViewCell.swift
+//  Menu.swift
 //  Demo
 //
-//  Created by TRANVIET on 25/10/2022.
+//  Created by TRANVIET on 22/11/2022.
 //
 
 import UIKit
 
-class MenuTableViewCell: UITableViewCell, UICollectionViewDelegate, UICollectionViewDataSource {
+class Menu: UICollectionViewCell, UICollectionViewDelegate, UICollectionViewDataSource {
     
     private let item = ["Facebook", "Instagram", "Youtube", "Shopee", "Bank", "Bookmark", "Interrogation", "More"]
+    
     private lazy var navigateApp: String = ""
     
     @IBOutlet weak var topLabel: UILabel!
@@ -24,20 +25,14 @@ class MenuTableViewCell: UITableViewCell, UICollectionViewDelegate, UICollection
         menuCollectionView.register(UINib(nibName: "MenuCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "MenuCollectionViewCell")
         configureUI()
     }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
-    }
-
+    
     @IBAction func LogoutPressed(_ sender: Any) {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let loginViewController = storyboard.instantiateViewController(identifier: "Login")
         (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.changeRootViewController(loginViewController)
-         
      }
-    
+
+
 
     private func configureUI() {
         self.backgroundColor = .red
@@ -76,5 +71,5 @@ class MenuTableViewCell: UITableViewCell, UICollectionViewDelegate, UICollection
              return "evening"
          }
     }
-}
 
+}

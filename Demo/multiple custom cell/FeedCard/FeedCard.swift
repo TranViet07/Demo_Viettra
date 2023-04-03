@@ -1,14 +1,14 @@
 //
-//  FeedTableViewCell.swift
+//  FeedCard.swift
 //  Demo
 //
-//  Created by TRANVIET on 04/10/2022.
+//  Created by TRANVIET on 22/11/2022.
 //
 
 import UIKit
 
-class FeedTableViewCell: UITableViewCell {
-
+class FeedCard: UICollectionViewCell {
+    
     @IBOutlet weak var feedImage: UIImageView!
     @IBOutlet weak var feedLabel: UILabel!
     
@@ -19,4 +19,9 @@ class FeedTableViewCell: UITableViewCell {
         feedImage.image = nil
     }
     
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        // Initialization code
+    }
+
 }
